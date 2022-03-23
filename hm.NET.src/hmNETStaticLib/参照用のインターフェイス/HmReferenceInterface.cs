@@ -326,6 +326,14 @@ namespace Hidemaru
                 }
             }
 
+            public static int UpdateCount
+            {
+                get
+                {
+                    return hmNETDynamicLib.Hidemaru.Edit.UpdateCount;
+                }
+            }
+
         }
 
 

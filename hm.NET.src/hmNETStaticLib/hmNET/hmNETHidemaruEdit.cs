@@ -170,6 +170,28 @@ internal sealed partial class hmNETDynamicLib
                 }
             }
 
+            public static int UpdateCount
+            {
+                get
+                {
+                    if (version < 912.98)
+                    {
+                        throw new MissingMethodException("Hidemaru_Edit_UpdateCount");
+                    }
+                    IntPtr hWndHidemaru = WindowHandle;
+                    if (hWndHidemaru != IntPtr.Zero)
+                    {
+                        const int WM_USER = 0x400;
+                        const int WM_HIDEMARUINFO = WM_USER + 181;
+                        const int HIDEMARUINFO_GETUPDATECOUNT = 7;
+
+                        IntPtr updatecount = SendMessage(hWndHidemaru, WM_HIDEMARUINFO, HIDEMARUINFO_GETUPDATECOUNT, IntPtr.Zero);
+                        return (int)updatecount;
+                    }
+                    return -1;
+                }
+            }
+
             /// <summary>
             /// TotalText
             /// </summary>

@@ -45,6 +45,7 @@ Class Hidemaru.Hm+Edit: AutoLayout, AnsiClass, Class, NestedPublic, Abstract, Se
     System.String LineText 'get set' : 
     ICursorPos CursorPos 'get ' : 
     IMousePos MousePos 'get ' : 
+    Int32 UpdateCount 'get ' : 
   Methods:
     get_FilePath(): PrivateScope, Public, Static, HideBySig, SpecialName
     get_QueueStatus(): PrivateScope, Public, Static, HideBySig, SpecialName
@@ -56,6 +57,7 @@ Class Hidemaru.Hm+Edit: AutoLayout, AnsiClass, Class, NestedPublic, Abstract, Se
     set_LineText(String): PrivateScope, Public, Static, HideBySig, SpecialName
     get_CursorPos(): PrivateScope, Public, Static, HideBySig, SpecialName
     get_MousePos(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_UpdateCount(): PrivateScope, Public, Static, HideBySig, SpecialName
 Class Hidemaru.Hm+File: AutoLayout, AnsiClass, Class, NestedPublic, Abstract, Sealed, BeforeFieldInit
   Methods:
     Open(String, Int32(Optional, HasDefault)): PrivateScope, Public, Static, HideBySig
