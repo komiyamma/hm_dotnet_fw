@@ -229,6 +229,32 @@ namespace Hidemaru
                     }
                 }
             }
+
+            public static IGlobalVar GlobalVar = new TGlobalVar();
+            public interface IGlobalVar
+            {
+                string Get(string name, int sharedflag);
+                bool Set(string name, string value, int sharedflag);
+            }
+
+            private class TGlobalVar : IGlobalVar
+            {
+                public string Get(string name, int sharedflag)
+                {
+                    return hmNETDynamicLib.Hidemaru.Macro.GetGlobalVariable(name, sharedflag);
+                }
+
+                public bool Set(string name, string value, int sharedflag)
+                {
+                    var ret = hmNETDynamicLib.Hidemaru.Macro.SetGlobalVariable(name, value, sharedflag);
+                    if (ret != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
         }
 
         // エディット系

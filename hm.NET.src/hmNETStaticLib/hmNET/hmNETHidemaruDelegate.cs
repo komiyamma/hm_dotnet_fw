@@ -56,6 +56,12 @@ internal sealed partial class hmNETDynamicLib
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
         delegate IntPtr TLoadFileUnicode([MarshalAs(UnmanagedType.LPWStr)] String pwszFileName, int nEncode, ref int pcwchOut, IntPtr lParam1, IntPtr lParam2);
 
+        [UnmanagedFunctionPointer(CallingConvention.Winapi)]
+        delegate IntPtr TGetStaticVariable([MarshalAs(UnmanagedType.LPWStr)] String pwszSymbolName, int sharedMemoryFlag);
+
+        [UnmanagedFunctionPointer(CallingConvention.Winapi)]
+        delegate int TSetStaticVariable([MarshalAs(UnmanagedType.LPWStr)] String pwszSymbolName, [MarshalAs(UnmanagedType.LPWStr)] String pwszValue, int sharedMemoryFlag);
+
         // 秀丸本体から出ている関数群
         static TGetCurrentWindowHandle pGetCurrentWindowHandle;
         static TGetTotalTextUnicode pGetTotalTextUnicode;
@@ -67,6 +73,8 @@ internal sealed partial class hmNETDynamicLib
         static TCheckQueueStatus pCheckQueueStatus;
         static TAnalyzeEncoding pAnalyzeEncoding;
         static TLoadFileUnicode pLoadFileUnicode;
+        static TGetStaticVariable pGetStaticVariable;
+        static TSetStaticVariable pSetStaticVariable;
 
         // OutputPaneから出ている関数群
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -155,22 +163,33 @@ internal sealed partial class hmNETDynamicLib
                 {
                     hmExeHandle = new UnManagedDll(strExecuteFullpath);
 
-                    pGetTotalTextUnicode = hmExeHandle.GetProcDelegate<TGetTotalTextUnicode>("Hidemaru_GetTotalTextUnicode");
-                    pGetLineTextUnicode = hmExeHandle.GetProcDelegate<TGetLineTextUnicode>("Hidemaru_GetLineTextUnicode");
-                    pGetSelectedTextUnicode = hmExeHandle.GetProcDelegate<TGetSelectedTextUnicode>("Hidemaru_GetSelectedTextUnicode");
-                    pGetCursorPosUnicode = hmExeHandle.GetProcDelegate<TGetCursorPosUnicode>("Hidemaru_GetCursorPosUnicode");
-                    pEvalMacro = hmExeHandle.GetProcDelegate<TEvalMacro>("Hidemaru_EvalMacro");
-                    pCheckQueueStatus = hmExeHandle.GetProcDelegate<TCheckQueueStatus>("Hidemaru_CheckQueueStatus");
+                    try { 
+                        pGetTotalTextUnicode = hmExeHandle.GetProcDelegate<TGetTotalTextUnicode>("Hidemaru_GetTotalTextUnicode");
+                        pGetLineTextUnicode = hmExeHandle.GetProcDelegate<TGetLineTextUnicode>("Hidemaru_GetLineTextUnicode");
+                        pGetSelectedTextUnicode = hmExeHandle.GetProcDelegate<TGetSelectedTextUnicode>("Hidemaru_GetSelectedTextUnicode");
+                        pGetCursorPosUnicode = hmExeHandle.GetProcDelegate<TGetCursorPosUnicode>("Hidemaru_GetCursorPosUnicode");
+                        pEvalMacro = hmExeHandle.GetProcDelegate<TEvalMacro>("Hidemaru_EvalMacro");
+                        pCheckQueueStatus = hmExeHandle.GetProcDelegate<TCheckQueueStatus>("Hidemaru_CheckQueueStatus");
 
-                    if (version >= 873) { 
-                        pGetCursorPosUnicodeFromMousePos = hmExeHandle.GetProcDelegate<TGetCursorPosUnicodeFromMousePos>("Hidemaru_GetCursorPosUnicodeFromMousePos");
-                        pGetCurrentWindowHandle = hmExeHandle.GetProcDelegate<TGetCurrentWindowHandle>("Hidemaru_GetCurrentWindowHandle");
+                        if (version >= 873) { 
+                            pGetCursorPosUnicodeFromMousePos = hmExeHandle.GetProcDelegate<TGetCursorPosUnicodeFromMousePos>("Hidemaru_GetCursorPosUnicodeFromMousePos");
+                            pGetCurrentWindowHandle = hmExeHandle.GetProcDelegate<TGetCurrentWindowHandle>("Hidemaru_GetCurrentWindowHandle");
+                        }
+
+                        if (version >= 890)
+                        {
+                            pAnalyzeEncoding = hmExeHandle.GetProcDelegate<TAnalyzeEncoding>("Hidemaru_AnalyzeEncoding");
+                            pLoadFileUnicode = hmExeHandle.GetProcDelegate<TLoadFileUnicode>("Hidemaru_LoadFileUnicode");
+                        }
+                        if (version >= 915)
+                        {
+                            pGetStaticVariable = hmExeHandle.GetProcDelegate<TGetStaticVariable>("Hidemaru_GetStaticVariable");
+                            pSetStaticVariable = hmExeHandle.GetProcDelegate<TSetStaticVariable>("Hidemaru_SetStaticVariable");
+                        }
                     }
-
-                    if (version >= 890)
+                    catch (Exception e)
                     {
-                        pAnalyzeEncoding = hmExeHandle.GetProcDelegate<TAnalyzeEncoding>("Hidemaru_AnalyzeEncoding");
-                        pLoadFileUnicode = hmExeHandle.GetProcDelegate<TLoadFileUnicode>("Hidemaru_LoadFileUnicode");
+                        OutputDebugStream(ErrorMsg.MethodNeedOutputNotFound + ":\n" + e.Message);
                     }
 
                     try

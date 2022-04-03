@@ -24,6 +24,60 @@ internal sealed partial class hmNETDynamicLib
             [DllImport("user32.dll", SetLastError = true)]
             static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, IntPtr szTitle);
 
+            public static int SetGlobalVariable(String symbolname, String value, int sharedMemoryFlag)
+            {
+                if (version < 915)
+                {
+                    OutputDebugStream(ErrorMsg.MethodNeed915);
+                    throw new MissingMethodException("Hidemaru_SetGlobalVariable");
+                }
+                try
+                {
+                    if (pSetStaticVariable != null)
+                    {
+                        return pSetStaticVariable(symbolname, value, sharedMemoryFlag);
+                    }
+                    else
+                    {
+                        OutputDebugStream(ErrorMsg.MethodNeed915);
+                        throw new MissingMethodException("Hidemaru_SetGlobalVariable");
+                    }
+                }
+                catch (Exception e)
+                {
+                    OutputDebugStream(e.Message);
+                    throw new MissingMethodException("Hidemaru_SetGlobalVariable");
+                }
+            }
+
+            public static string GetGlobalVariable(String symbolname, int sharedMemoryFlag)
+            {
+                if (version < 915)
+                {
+                    OutputDebugStream(ErrorMsg.MethodNeed915);
+                    throw new MissingMethodException("Hidemaru_GetGlobalVariable");
+                }
+                try
+                {
+                    if (pGetStaticVariable != null)
+                    {
+                        IntPtr hGlobal = pGetStaticVariable(symbolname, sharedMemoryFlag);
+                        return HGlobalToString(hGlobal);
+
+                    }
+                    else
+                    {
+                        OutputDebugStream(ErrorMsg.MethodNeed915);
+                        throw new MissingMethodException("Hidemaru_GetGlobalVariable");
+                    }
+                }
+                catch (Exception e)
+                {
+                    OutputDebugStream(e.Message);
+                    throw new MissingMethodException("Hidemaru_GetGlobalVariable");
+                }
+            }
+
             public static bool IsExecuting
             {
                 get
