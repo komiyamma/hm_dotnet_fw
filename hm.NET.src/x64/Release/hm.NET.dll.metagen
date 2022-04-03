@@ -28,7 +28,7 @@ Class Hidemaru.Hm+Macro: AutoLayout, AnsiClass, Class, NestedPublic, Abstract, S
   Fields:
     IExec Exec : Public, Static
     IVar Var : Public, Static
-    IGlobalVar GlobalVar : Public, Static
+    IStaticVar StaticVar : Public, Static
   Properties:
     Boolean IsExecuting 'get ' : 
   Methods:
@@ -130,7 +130,7 @@ Interface Hidemaru.Hm+Macro+IVar: AutoLayout, AnsiClass, Class, NestedPublic, Cl
   Methods:
     get_Item(String): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
     set_Item(String, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
-Interface Hidemaru.Hm+Macro+IGlobalVar: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+Interface Hidemaru.Hm+Macro+IStaticVar: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
   Methods:
     Get(String, Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Set(String, String, Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract

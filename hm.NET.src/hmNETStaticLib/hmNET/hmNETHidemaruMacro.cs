@@ -24,7 +24,7 @@ internal sealed partial class hmNETDynamicLib
             [DllImport("user32.dll", SetLastError = true)]
             static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, IntPtr szTitle);
 
-            public static int SetGlobalVariable(String symbolname, String value, int sharedMemoryFlag)
+            public static int SetStaticVariable(String symbolname, String value, int sharedMemoryFlag)
             {
                 if (version < 915)
                 {
@@ -46,16 +46,16 @@ internal sealed partial class hmNETDynamicLib
                 catch (Exception e)
                 {
                     OutputDebugStream(e.Message);
-                    throw new MissingMethodException("Hidemaru_SetGlobalVariable");
+                    throw new MissingMethodException("Hidemaru_SetStaticVariable");
                 }
             }
 
-            public static string GetGlobalVariable(String symbolname, int sharedMemoryFlag)
+            public static string GetStaticVariable(String symbolname, int sharedMemoryFlag)
             {
                 if (version < 915)
                 {
                     OutputDebugStream(ErrorMsg.MethodNeed915);
-                    throw new MissingMethodException("Hidemaru_GetGlobalVariable");
+                    throw new MissingMethodException("Hidemaru_GetStaticVariable");
                 }
                 try
                 {
