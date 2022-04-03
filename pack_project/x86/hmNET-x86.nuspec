@@ -3,7 +3,7 @@
   <metadata>
     <id>hmNET-x86</id>
     <title>hm.NET (32bit版)</title>
-    <version>2.0.5.1</version>
+    <version>2.0.6.2</version>
     <authors>Akitsugu Komiyama</authors>
     <owners>Akitsugu Komiyama</owners>
     <icon>icon.png</icon>
@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>C++から秀丸マクロ空間にアクセスして、秀丸マクロの機能を利用する</summary>
     <description>C++から秀丸マクロ空間にアクセスして、秀丸マクロの機能を利用可能なdllを作成するためのライブラリ。</description>
-    <releaseNotes>Hm.Edit.UpdateCountの追加</releaseNotes>
+    <releaseNotes>Hm.Macro.StaticVar.GetとSetの追加</releaseNotes>
     <copyright>Copyright (C) 2017-2021 Akitsugu Komiyama</copyright>
     <tags>C++ Hidemaru 秀丸 Library Macros</tags>
     <language>ja-JP</language>
