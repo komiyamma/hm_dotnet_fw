@@ -29,7 +29,7 @@ internal sealed partial class hmNETDynamicLib
                 if (version < 915)
                 {
                     OutputDebugStream(ErrorMsg.MethodNeed915);
-                    throw new MissingMethodException("Hidemaru_SetGlobalVariable");
+                    throw new MissingMethodException("HidemaruMacroSetGlobalVariableException");
                 }
                 try
                 {
@@ -40,13 +40,13 @@ internal sealed partial class hmNETDynamicLib
                     else
                     {
                         OutputDebugStream(ErrorMsg.MethodNeed915);
-                        throw new MissingMethodException("Hidemaru_SetGlobalVariable");
+                        throw new MissingMethodException("HidemaruMacroSetGlobalVariableException");
                     }
                 }
                 catch (Exception e)
                 {
                     OutputDebugStream(e.Message);
-                    throw new MissingMethodException("Hidemaru_SetStaticVariable");
+                    throw new MissingMethodException("HidemaruMacroSetGlobalVariableException");
                 }
             }
 
@@ -55,7 +55,7 @@ internal sealed partial class hmNETDynamicLib
                 if (version < 915)
                 {
                     OutputDebugStream(ErrorMsg.MethodNeed915);
-                    throw new MissingMethodException("Hidemaru_GetStaticVariable");
+                    throw new MissingMethodException("HidemaruMacroGetStaticVariableException");
                 }
                 try
                 {
@@ -68,13 +68,13 @@ internal sealed partial class hmNETDynamicLib
                     else
                     {
                         OutputDebugStream(ErrorMsg.MethodNeed915);
-                        throw new MissingMethodException("Hidemaru_GetGlobalVariable");
+                        throw new MissingMethodException("HidemaruMacroGetStaticVariableException");
                     }
                 }
                 catch (Exception e)
                 {
                     OutputDebugStream(e.Message);
-                    throw new MissingMethodException("Hidemaru_GetGlobalVariable");
+                    throw new MissingMethodException("HidemaruMacroGetStaticVariableException");
                 }
             }
 
