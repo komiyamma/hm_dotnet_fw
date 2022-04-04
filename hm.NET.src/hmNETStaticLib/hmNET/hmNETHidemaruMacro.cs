@@ -46,7 +46,7 @@ internal sealed partial class hmNETDynamicLib
                 catch (Exception e)
                 {
                     OutputDebugStream(e.Message);
-                    throw new MissingMethodException("HidemaruMacroSetGlobalVariableException");
+                    throw;
                 }
             }
 
@@ -74,7 +74,7 @@ internal sealed partial class hmNETDynamicLib
                 catch (Exception e)
                 {
                     OutputDebugStream(e.Message);
-                    throw new MissingMethodException("HidemaruMacroGetStaticVariableException");
+                    throw;
                 }
             }
 
