@@ -62,7 +62,6 @@
     <Compile Include="hmNET\hmNETHidemaruMacro.cs" />
     <Compile Include="hmNET\hmNETStaticLib.cs" />
     <Compile Include="hmNET\UnManagedDll.cs" />
-    <Compile Include="hmNET\HmOriginalDecodeMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="参照用のインターフェイス\HmReferenceInterface.cs" />
   </ItemGroup>
