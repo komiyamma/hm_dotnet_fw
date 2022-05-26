@@ -1,5 +1,4 @@
-﻿/*
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 internal sealed partial class hmNETDynamicLib
@@ -8,112 +7,89 @@ internal sealed partial class hmNETDynamicLib
     {
         internal class HmOriginalDecodeFunc
         {
-            // 元へと戻す際に構築する逆引き辞書。ほとんどのシーンでは利用されないであろうから、必要となった時はじめて逆引き辞書を作る。
-            private static Dictionary<UInt32, UInt16> sorted_map = null;
-            private static void InitReverseDictionary()
+            static bool IsSTARTUNI_inline(uint byte4)
             {
-                if (sorted_map == null)
-                {
-                    sorted_map = new Dictionary<UInt32, UInt16>();
-                    for (int i = 0; i < HmOriginalDecodeMap.decode_map.Length; i++)
-                    {
-                        UInt32 encode_key = HmOriginalEncodeMap.encode_map[i];
-                        UInt32 decode_key = HmOriginalDecodeMap.decode_map[i];
-                        if (encode_key == decode_key || Math.Abs(encode_key - decode_key) == 0x8000000)
-                        {
-                            sorted_map.Add(decode_key, (UInt16)i);
-                        }
-                        else
-                        {
-                            sorted_map.Add(encode_key, (UInt16)i);
-                        }
-                    }
-                }
+                return (byte4 & 0xF4808000) == 0x04808000;
             }
 
-            // 秀丸独自エンコード→wchar_tへ。
-            // wchar_tに直接対応していないような古い秀丸では、この特殊な変換マップによる変換をしてバイトコードから元のwchar_tへと戻す必要がある。
-            public static string DecodeOriginalEnncodeVectorToWString(byte[] encode_data)
+            static long MakeWord(long low, long high)
             {
-                InitReverseDictionary();
+                return ((long)high << 8) | low;
+            }
+            static char GetUnicodeInText(byte[] pchSrc)
+            {
+                long value = MakeWord(
+                    (pchSrc[1] & 0x7F | ((pchSrc[3] & 0x01) << 7)),
+                    (pchSrc[2] & 0x7F | ((pchSrc[3] & 0x02) << 6))
+                );
 
-                int index = 0;
-                string wstr = "";
+                byte[] byteArray = BitConverter.GetBytes(value);
 
-                while (index < encode_data.Length)
+                byte[] charByte = { byteArray[0], byteArray[1] };
+
+                char wch = BitConverter.ToChar(charByte, 0);
+
+                return wch;
+            }
+
+            public static string DecodeOriginalEncodeVector(List<byte> OriginalEncodeData)
+            {
+                try
                 {
-                    bool found = false;
-                    if (encode_data.Length - index > 4)
-                    {
-                        byte[] buf4 = new byte[] { encode_data[index + 0], encode_data[index + 1], encode_data[index + 2], encode_data[index + 3] };
-                        UInt32 map_key4 = BitConverter.ToUInt32(buf4, 0);
-                        if (sorted_map.ContainsKey(map_key4))
-                        {
-                            wstr += (char)(sorted_map[map_key4]);
-                            index += 4;
-                            found = true;
-                        }
-                    }
+                    string result = "";
 
-                    if (!found)
+                    byte[] byteArray = OriginalEncodeData.ToArray();
+
+                    // 一時バッファー用
+                    List<byte> tmp_buffer = new List<byte>();
+                    int len = OriginalEncodeData.Count;
+
+                    int lastcheckindex = len - 4; // IsSTARTUNI_inline には 4バイト必要
+                    if (lastcheckindex < 0)
                     {
-                        if (encode_data.Length - index > 3)
+                        lastcheckindex = 0;
+                    }
+                    for (int i = 0; i < len; i++)
+                    {
+                        // 一般の文字としてはほぼ利用されないスターマーク。
+                        if (i <= lastcheckindex && byteArray[i] == '\x1A')
                         {
-                            byte[] buf3 = new byte[] { encode_data[index + 0], encode_data[index + 1], encode_data[index + 2], 0 };
-                            UInt32 map_key3 = BitConverter.ToUInt32(buf3, 0);
-                            if (sorted_map.ContainsKey(map_key3))
+                            uint StarUni = BitConverter.ToUInt32(byteArray, i);
+
+                            if (IsSTARTUNI_inline(StarUni))
                             {
-                                wstr += (char)(sorted_map[map_key3]);
-                                index += 3;
-                                found = true;
+                                // 今までの分はスターユニコードではないので、通常のSJISとみなし、utf16に変換して足し込み
+                                if (tmp_buffer.Count > 0)
+                                {
+                                    result += System.Text.Encoding.GetEncoding(932).GetString(tmp_buffer.ToArray());
+                                    tmp_buffer.Clear();
+                                }
+
+                                byte[] starByteArray = BitConverter.GetBytes(StarUni);
+                                char wch = GetUnicodeInText(starByteArray);
+                                i = i + 3; // 1バイトではなく4バイト消化したので、計算する
+                                result += wch;
+                                continue;
                             }
                         }
+                        tmp_buffer.Add(byteArray[i]);
                     }
 
-                    if (!found)
+                    if (tmp_buffer.Count > 0)
                     {
-                        if (encode_data.Length - index > 2)
-                        {
-                            byte[] buf2 = new byte[] { encode_data[index + 0], encode_data[index + 1], 0, 0 };
-                            UInt32 map_key2 = BitConverter.ToUInt32(buf2, 0);
-                            if (sorted_map.ContainsKey(map_key2))
-                            {
-                                UInt16 value = sorted_map[map_key2];
-                                wstr += (char)(value);
-                                index += 2;
-                                found = true;
-                            }
-                        }
+                        result += System.Text.Encoding.GetEncoding(932).GetString(tmp_buffer.ToArray());
+                        tmp_buffer.Clear();
                     }
 
-                    if (!found)
-                    {
-                        if (encode_data.Length - index > 1)
-                        {
-                            byte[] buf1 = new byte[] { encode_data[index + 0], 0, 0, 0 };
-                            UInt32 map_key1 = BitConverter.ToUInt32(buf1, 0);
-                            if (map_key1 != 0 && sorted_map.ContainsKey(map_key1))
-                            {
-                                wstr += (char)(sorted_map[map_key1]);
-                                index += 1;
-                                found = true;
-                            }
-                        }
-                    }
-
-                    if (!found)
-                    {
-                        char ch = (char)encode_data[index + 0];
-                        if (ch != 0)
-                        {
-                            wstr += ch;
-                        }
-                        index += 1;
-                    }
+                    return result;
                 }
-                return wstr;
+                catch (Exception e)
+                {
+                    System.Diagnostics.Trace.WriteLine(e);
+                }
+
+                return "";
             }
         }
     }
 }
-*/

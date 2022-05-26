@@ -1,6 +1,7 @@
 ﻿// ★秀丸クラス
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 internal sealed partial class hmNETDynamicLib
 {
@@ -85,6 +86,18 @@ internal sealed partial class hmNETDynamicLib
             {
                 try
                 {
+                    IntPtr startpointer = pExplorerPane_GetProject(Hidemaru.WindowHandle);
+                    List<byte> blist = GetPointerToByteArray(startpointer);
+
+                    string project_name = Hidemaru.HmOriginalDecodeFunc.DecodeOriginalEncodeVector(blist);
+
+                    if (String.IsNullOrEmpty(project_name))
+                    {
+                        return null;
+                    }
+                    return project_name;
+
+                    /*
                     if (hmNETDynamicLib.Hidemaru.Macro.IsExecuting)
                     {
                         string cmd = @"dllfuncstr(loaddll(""HmExplorerPane""), ""GetProject"", hidemaruhandle(0))";
@@ -106,6 +119,7 @@ internal sealed partial class hmNETDynamicLib
                         }
                         return result.Message;
                     }
+                    */
                 }
                 catch (Exception e)
                 {
@@ -113,6 +127,29 @@ internal sealed partial class hmNETDynamicLib
                 }
 
                 return null;
+            }
+
+            private static List<byte> GetPointerToByteArray(IntPtr startpointer)
+            {
+                List<byte> blist = new List<byte>();
+
+                int index = 0;
+                while (true)
+                {
+                    var b = Marshal.ReadByte(startpointer, index);
+
+                    blist.Add(b);
+
+                    // 文字列の終端はやはり0
+                    if (b == 0)
+                    {
+                        break;
+                    }
+
+                    index++;
+                }
+
+                return blist;
             }
 
             // GetCurrentDirする
@@ -125,6 +162,18 @@ internal sealed partial class hmNETDynamicLib
                 }
                 try
                 {
+                    IntPtr startpointer = pExplorerPane_GetCurrentDir(Hidemaru.WindowHandle);
+                    List<byte> blist = GetPointerToByteArray(startpointer);
+
+                    string currentdir_name = Hidemaru.HmOriginalDecodeFunc.DecodeOriginalEncodeVector(blist);
+
+                    if (String.IsNullOrEmpty(currentdir_name))
+                    {
+                        return null;
+                    }
+                    return currentdir_name;
+
+                    /*
                     if (hmNETDynamicLib.Hidemaru.pExplorerPane_GetCurrentDir != null)
                     {
                         if (hmNETDynamicLib.Hidemaru.Macro.IsExecuting)
@@ -149,6 +198,7 @@ internal sealed partial class hmNETDynamicLib
                             return result.Message;
                         }
                     }
+                    */
                 }
                 catch (Exception e)
                 {
