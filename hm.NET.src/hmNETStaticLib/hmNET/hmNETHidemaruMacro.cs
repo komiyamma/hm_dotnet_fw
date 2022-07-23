@@ -504,18 +504,58 @@ internal sealed partial class hmNETDynamicLib
                     arg_keys.Add(l.Key);
                 }
 
+                tmpVar = null;
+                int dll = iDllBindHandle;
+
+                if (dll == 0)
+                {
+                    throw new NullReferenceException(ErrorMsg.NoDllBindHandle866);
+                }
+
                 // それを「,」で繋げる
                 string args_string = String.Join(", ", arg_keys);
                 // それを指定の「文」で実行する形
                 string expression = $"{funcname} {args_string};\n";
 
+                String invocate = ModifyFuncCallByDllType("{0}");
+                String cmd = "" +
+                expression + 
+                "##_tmp_dll_id_ret = dllfuncw( " + invocate + " \"SetTmpVar\", result);\n" +
+                "##_tmp_dll_id_ret = 0;\n";
+
+
                 // 実行する
-                ExecResult ret = hmNETDynamicLib.Hidemaru.Macro.Eval(expression);
+                ExecResult ret = hmNETDynamicLib.Hidemaru.Macro.Eval(cmd);
                 ExecStateResult result = new ExecStateResult();
                 result.Result = ret.Result;
                 result.Error = ret.Error;
                 result.Message = ret.Message;
                 result.Args = new List<object>();
+
+                int macro_result = 0;
+                if (IntPtr.Size == 4)
+                {
+                    macro_result = (Int32)tmpVar + 0; // 確実に複製を
+                }
+                else
+                {
+                    Int64 macro_result64 = (Int64)tmpVar + 0; // 確実に複製を
+                    Int32 macro_result32 = (Int32)HmClamp<Int64>(macro_result64, Int32.MinValue, Int32.MaxValue);
+                    macro_result = (Int32)macro_result32;
+                }
+
+                if (result.Error == null)
+                {
+                    if (macro_result <= 0)
+                    {
+                        result.Error = new InvalidOperationException("HidemaruMacroResultZeroException");
+                        result.Result = macro_result;
+                    } else
+                    {
+                        result.Result = macro_result;
+                    }
+                }
+                tmpVar = null; // クリア
 
                 // 成否も含めて結果を入れる。
                 // new TResult(ret.Result, ret.Message, ret.Error);
