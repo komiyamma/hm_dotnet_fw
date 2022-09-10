@@ -131,7 +131,11 @@ Interface Hidemaru.Hm+Macro+IVar: AutoLayout, AnsiClass, Class, NestedPublic, Cl
     get_Item(String): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
     set_Item(String, Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
 Interface Hidemaru.Hm+Macro+IStaticVar: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
+  Properties:
+    System.String Item [System.String, Int32] 'get set' : 
   Methods:
+    get_Item(String, Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+    set_Item(String, Int32, String): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
     Get(String, Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Set(String, String, Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
 Interface Hidemaru.Hm+Edit+ICursorPos: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract

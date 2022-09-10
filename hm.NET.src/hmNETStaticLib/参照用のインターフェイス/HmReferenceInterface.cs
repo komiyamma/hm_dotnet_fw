@@ -233,12 +233,25 @@ namespace Hidemaru
             public static IStaticVar StaticVar = new TStaticVar();
             public interface IStaticVar
             {
+                string this[String name, int sharedflag] { get; set; }
                 string Get(string name, int sharedflag);
                 bool Set(string name, string value, int sharedflag);
             }
 
             private class TStaticVar : IStaticVar
             {
+                public String this[String name, int sharedflag]
+                {
+                    get
+                    {
+                        return hmNETDynamicLib.Hidemaru.Macro.GetStaticVariable(name, sharedflag);
+                    }
+                    set
+                    {
+                        var ret = hmNETDynamicLib.Hidemaru.Macro.SetStaticVariable(name, value, sharedflag);
+                    }
+                }
+
                 public string Get(string name, int sharedflag)
                 {
                     return hmNETDynamicLib.Hidemaru.Macro.GetStaticVariable(name, sharedflag);
