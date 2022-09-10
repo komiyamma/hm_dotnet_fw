@@ -6,6 +6,7 @@
 #include <windows.h>
 #include "hidemaruexe_export.h"
 
+
 #if DOTNET_EXPORTS
 using namespace System;
 using namespace System::Collections::Generic;
