@@ -54,6 +54,9 @@ internal sealed partial class hmNETDynamicLib
                 if (number > Int32.MaxValue)
                 {
                     number = number - 4294967296;
+                    number = number - Int32.MinValue;
+                    number = number % 4294967296;
+                    number = number + Int32.MinValue;
                 }
                 else
                 {
@@ -65,6 +68,9 @@ internal sealed partial class hmNETDynamicLib
                 if (number < Int32.MinValue)
                 {
                     number = number + 4294967296;
+                    number = number + Int32.MinValue;
+                    number = number % 4294967296;
+                    number = number - Int32.MinValue;
                 }
                 else
                 {
@@ -82,7 +88,6 @@ internal sealed partial class hmNETDynamicLib
             intvar = ret_number;
             return success;
         }
-
 
         private static bool IsDoubleNumeric(object value)
         {
