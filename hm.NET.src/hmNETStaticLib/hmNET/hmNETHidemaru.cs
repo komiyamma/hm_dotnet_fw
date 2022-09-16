@@ -46,6 +46,33 @@ internal sealed partial class hmNETDynamicLib
             else return val;
         }
 
+        private static bool LongToInt(long number, out int intvar)
+        {
+            int ret_number = 0;
+            while (true)
+            {
+                if (number > Int32.MaxValue)
+                {
+                    number = number - 4294967296;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            bool success = false;
+            if (Int32.MinValue <= number && number <= Int32.MaxValue)
+            {
+                ret_number = (int)number;
+                success = true;
+            }
+
+            intvar = ret_number;
+            return success;
+        }
+
+
         private static bool IsDoubleNumeric(object value)
         {
             return value is double || value is float;
