@@ -268,6 +268,121 @@ namespace Hidemaru
                 }
             }
 
+            public static class Flags
+            {
+                public static class Encode
+                {
+                    //OPENFILE等のENCODE相当
+                    public static int Sjis { get { return 0x01; } }
+                    public static int Utf16 { get { return 0x02; } }
+                    public static int Euc { get { return 0x03; } }
+                    public static int Jis { get { return 0x04; } }
+                    public static int Utf7 { get { return 0x05; } }
+                    public static int Utf8 { get { return 0x06; } }
+                    public static int Utf16_be { get { return 0x07; } }
+                    public static int Euro { get { return 0x08; } }
+                    public static int Gb2312 { get { return 0x09; } }
+                    public static int Big5 { get { return 0x0a; } }
+                    public static int Euckr { get { return 0x0b; } }
+                    public static int Johab { get { return 0x0c; } }
+                    public static int Easteuro { get { return 0x0d; } }
+                    public static int Baltic { get { return 0x0e; } }
+                    public static int Greek { get { return 0x0f; } }
+                    public static int Russian { get { return 0x10; } }
+                    public static int Symbol { get { return 0x11; } }
+                    public static int Turkish { get { return 0x12; } }
+                    public static int Hebrew { get { return 0x13; } }
+                    public static int Arabic { get { return 0x14; } }
+                    public static int Thai { get { return 0x15; } }
+                    public static int Vietnamese { get { return 0x16; } }
+                    public static int Mac { get { return 0x17; } }
+                    public static int Oem { get { return 0x18; } }
+                    public static int Default { get { return 0x19; } }
+                    public static int Utf32 { get { return 0x1b; } }
+                    public static int Utf32_be { get { return 0x1c; } }
+                    public static int Binary { get { return 0x1a; } }
+                    public static int LF { get { return 0x40; } }
+                    public static int CR { get { return 0x80; } }
+
+                    //SAVEASの他のオプションの数値指定
+                    public static int Bom { get { return 0x0600; } }
+                    public static int NoBom { get { return 0x0400; } }
+                    public static int Selection { get { return 0x2000; } }
+
+                    //OPENFILEの他のオプションの数値指定
+                    public static int NoAddHist { get { return 0x0100; } }
+                    public static int WS { get { return 0x0800; } }
+                    public static int WB { get { return 0x1000; } }
+                }
+
+                public static class SearchOption
+                {
+                    //searchoption(検索関係)
+                    public static int Word { get { return 0x00000001; } }
+                    public static int Casesense { get { return 0x00000002; } }
+                    public static int NoCasesense { get { return 0x00000000; } }
+                    public static int Regular { get { return 0x00000010; } }
+                    public static int NoRegular { get { return 0x00000000; } }
+                    public static int Fuzzy { get { return 0x00000020; } }
+                    public static int Hilight { get { return 0x00003800; } }
+                    public static int NoHilight { get { return 0x00002000; } }
+                    public static int LinkNext { get { return 0x00000080; } }
+                    public static int Loop { get { return 0x01000000; } }
+
+                    //searchoption(マスク関係)
+                    public static int MaskComment { get { return 0x00020000; } }
+                    public static int MaskIfdef { get { return 0x00040000; } }
+                    public static int MaskNormal { get { return 0x00010000; } }
+                    public static int MaskScript { get { return 0x00080000; } }
+                    public static int MaskString { get { return 0x00100000; } }
+                    public static int MaskTag { get { return 0x00200000; } }
+                    public static int MaskOnly { get { return 0x00400000; } }
+                    public static int FEnableMaskFlags { get { return 0x00800000; } }
+
+                    //searchoption(置換関係)
+                    public static int FEnableReplace { get { return 0x00000004; } }
+                    public static int Ask { get { return 0x00000008; } }
+                    public static int NoClose { get { return 0x02000000; } }
+
+                    //searchoption(grep関係)
+                    public static int SubDir { get { return 0x00000100; } }
+                    public static int Icon { get { return 0x00000200; } }
+                    public static int Filelist { get { return 0x00000040; } }
+                    public static int FullPath { get { return 0x00000400; } }
+                    public static int OutputSingle { get { return 0x10000000; } }
+                    public static int OutputSameTab { get { return 0x20000000; } }
+
+                    //searchoption(grepして置換関係)
+                    public static int BackUp { get { return 0x04000000; } }
+                    public static int Preview { get { return 0x08000000; } }
+
+                    // searchoption2を使うよ、というフラグ。なんと、int32_maxを超えているので、特殊な処理が必要。
+                    public static long FEnableSearchOption2
+                    {
+                        get
+                        {
+                            if (IntPtr.Size == 4)
+                            {
+                                return -0x80000000;
+                            }
+                            else
+                            {
+                                return 0x80000000;
+                            }
+                        }
+                    }
+                }
+
+                public static class SearchOption2
+                {
+                    //searchoption2
+                    public static int UnMatch { get { return 0x00000001; } }
+                    public static int InColorMarker { get { return 0x00000002; } }
+                    public static int FGrepFormColumn { get { return 0x00000008; } }
+                    public static int FGrepFormHitOnly { get { return 0x00000010; } }
+                    public static int FGrepFormSortDate { get { return 0x00000020; } }
+                }
+            }
         }
 
         // エディット系

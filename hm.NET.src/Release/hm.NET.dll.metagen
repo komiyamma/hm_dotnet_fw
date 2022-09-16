@@ -138,6 +138,7 @@ Interface Hidemaru.Hm+Macro+IStaticVar: AutoLayout, AnsiClass, Class, NestedPubl
     set_Item(String, Int32, String): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
     Get(String, Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Set(String, String, Int32): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class Hidemaru.Hm+Macro+Flags: AutoLayout, AnsiClass, Class, NestedPublic, Abstract, Sealed, BeforeFieldInit
 Interface Hidemaru.Hm+Edit+ICursorPos: AutoLayout, AnsiClass, Class, NestedPublic, ClassSemanticsMask, Abstract
   Properties:
     Int32 LineNo 'get ' : 
@@ -181,3 +182,154 @@ Interface Hidemaru.Hm+File+IHidemaruStreamReader: AutoLayout, AnsiClass, Class, 
     Read(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     get_FilePath(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
     Close(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class Hidemaru.Hm+Macro+Flags+Encode: AutoLayout, AnsiClass, Class, NestedPublic, Abstract, Sealed, BeforeFieldInit
+  Properties:
+    Int32 Sjis 'get ' : 
+    Int32 Utf16 'get ' : 
+    Int32 Euc  'get ' : 
+    Int32 Jis  'get ' : 
+    Int32 Utf7 'get ' : 
+    Int32 Utf8 'get ' : 
+    Int32 Utf16_be 'get ' : 
+    Int32 Euro 'get ' : 
+    Int32 Gb2312 'get ' : 
+    Int32 Big5 'get ' : 
+    Int32 Euckr 'get ' : 
+    Int32 Johab 'get ' : 
+    Int32 Easteuro 'get ' : 
+    Int32 Baltic 'get ' : 
+    Int32 Greek 'get ' : 
+    Int32 Russian 'get ' : 
+    Int32 Symbol 'get ' : 
+    Int32 Turkish 'get ' : 
+    Int32 Hebrew 'get ' : 
+    Int32 Arabic 'get ' : 
+    Int32 Thai 'get ' : 
+    Int32 Vietnamese 'get ' : 
+    Int32 Mac  'get ' : 
+    Int32 Oem  'get ' : 
+    Int32 Default 'get ' : 
+    Int32 Utf32 'get ' : 
+    Int32 Utf32_be 'get ' : 
+    Int32 Binary 'get ' : 
+    Int32 LF   'get ' : 
+    Int32 CR   'get ' : 
+    Int32 Bom  'get ' : 
+    Int32 NoBom 'get ' : 
+    Int32 Selection 'get ' : 
+    Int32 NoAddHist 'get ' : 
+    Int32 WS   'get ' : 
+    Int32 WB   'get ' : 
+  Methods:
+    get_Sjis(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Utf16(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Euc(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Jis(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Utf7(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Utf8(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Utf16_be(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Euro(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Gb2312(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Big5(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Euckr(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Johab(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Easteuro(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Baltic(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Greek(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Russian(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Symbol(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Turkish(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Hebrew(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Arabic(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Thai(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Vietnamese(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Mac(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Oem(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Default(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Utf32(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Utf32_be(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Binary(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_LF(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_CR(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Bom(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_NoBom(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Selection(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_NoAddHist(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_WS(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_WB(): PrivateScope, Public, Static, HideBySig, SpecialName
+Class Hidemaru.Hm+Macro+Flags+SearchOption: AutoLayout, AnsiClass, Class, NestedPublic, Abstract, Sealed, BeforeFieldInit
+  Properties:
+    Int32 Word 'get ' : 
+    Int32 Casesense 'get ' : 
+    Int32 NoCasesense 'get ' : 
+    Int32 Regular 'get ' : 
+    Int32 NoRegular 'get ' : 
+    Int32 Fuzzy 'get ' : 
+    Int32 Hilight 'get ' : 
+    Int32 NoHilight 'get ' : 
+    Int32 LinkNext 'get ' : 
+    Int32 Loop 'get ' : 
+    Int32 MaskComment 'get ' : 
+    Int32 MaskIfdef 'get ' : 
+    Int32 MaskNormal 'get ' : 
+    Int32 MaskScript 'get ' : 
+    Int32 MaskString 'get ' : 
+    Int32 MaskTag 'get ' : 
+    Int32 MaskOnly 'get ' : 
+    Int32 FEnableMaskFlags 'get ' : 
+    Int32 FEnableReplace 'get ' : 
+    Int32 Ask  'get ' : 
+    Int32 NoClose 'get ' : 
+    Int32 SubDir 'get ' : 
+    Int32 Icon 'get ' : 
+    Int32 Filelist 'get ' : 
+    Int32 FullPath 'get ' : 
+    Int32 OutputSingle 'get ' : 
+    Int32 OutputSameTab 'get ' : 
+    Int32 BackUp 'get ' : 
+    Int32 Preview 'get ' : 
+    Int64 FEnableSearchOption2 'get ' : 
+  Methods:
+    get_Word(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Casesense(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_NoCasesense(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Regular(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_NoRegular(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Fuzzy(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Hilight(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_NoHilight(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_LinkNext(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Loop(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_MaskComment(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_MaskIfdef(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_MaskNormal(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_MaskScript(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_MaskString(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_MaskTag(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_MaskOnly(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_FEnableMaskFlags(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_FEnableReplace(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Ask(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_NoClose(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_SubDir(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Icon(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Filelist(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_FullPath(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_OutputSingle(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_OutputSameTab(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_BackUp(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Preview(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_FEnableSearchOption2(): PrivateScope, Public, Static, HideBySig, SpecialName
+Class Hidemaru.Hm+Macro+Flags+SearchOption2: AutoLayout, AnsiClass, Class, NestedPublic, Abstract, Sealed, BeforeFieldInit
+  Properties:
+    Int32 UnMatch 'get ' : 
+    Int32 InColorMarker 'get ' : 
+    Int32 FGrepFormColumn 'get ' : 
+    Int32 FGrepFormHitOnly 'get ' : 
+    Int32 FGrepFormSortDate 'get ' : 
+  Methods:
+    get_UnMatch(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_InColorMarker(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_FGrepFormColumn(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_FGrepFormHitOnly(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_FGrepFormSortDate(): PrivateScope, Public, Static, HideBySig, SpecialName
