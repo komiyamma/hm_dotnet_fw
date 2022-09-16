@@ -63,15 +63,8 @@ internal sealed partial class hmNETDynamicLib
             {
                 //1009=クリア
                 IntPtr r = OutputPane.SendMessage(1009);
-                if ((long)r < (long)int.MinValue)
-                {
-                    r = (IntPtr)int.MinValue;
-                }
-                if ((long)r > (long)int.MaxValue)
-                {
-                    r = (IntPtr)int.MaxValue;
-                }
-                return (int)r;
+                int ret = (int)HmClamp<long>((long)r, Int32.MinValue, Int32.MaxValue);
+                return ret;
             }
 
             public static IntPtr WindowHandle
