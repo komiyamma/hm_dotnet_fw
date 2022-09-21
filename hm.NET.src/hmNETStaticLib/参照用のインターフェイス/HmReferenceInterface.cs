@@ -488,6 +488,13 @@ namespace Hidemaru
                 }
             }
 
+            public static int InputStates { 
+                get 
+                {
+                    return hmNETDynamicLib.Hidemaru.Edit.InputStates;
+                }
+            }
+
         }
 
 
