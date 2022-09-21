@@ -62,6 +62,9 @@ internal sealed partial class hmNETDynamicLib
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
         delegate int TSetStaticVariable([MarshalAs(UnmanagedType.LPWStr)] String pwszSymbolName, [MarshalAs(UnmanagedType.LPWStr)] String pwszValue, int sharedMemoryFlag);
 
+        [UnmanagedFunctionPointer(CallingConvention.Winapi)]
+        delegate int TGetInputStates();
+
         // 秀丸本体から出ている関数群
         static TGetCurrentWindowHandle pGetCurrentWindowHandle;
         static TGetTotalTextUnicode pGetTotalTextUnicode;
@@ -75,6 +78,7 @@ internal sealed partial class hmNETDynamicLib
         static TLoadFileUnicode pLoadFileUnicode;
         static TGetStaticVariable pGetStaticVariable;
         static TSetStaticVariable pSetStaticVariable;
+        static TGetInputStates pGetInputStates;
 
         // OutputPaneから出ている関数群
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -185,6 +189,10 @@ internal sealed partial class hmNETDynamicLib
                         {
                             pGetStaticVariable = hmExeHandle.GetProcDelegate<TGetStaticVariable>("Hidemaru_GetStaticVariable");
                             pSetStaticVariable = hmExeHandle.GetProcDelegate<TSetStaticVariable>("Hidemaru_SetStaticVariable");
+                        }
+                        if (version >= 919)
+                        {
+                            pGetInputStates = hmExeHandle.GetProcDelegate<TGetInputStates>("Hidemaru_GetInputStates");
                         }
                     }
                     catch (Exception e)

@@ -193,6 +193,25 @@ internal sealed partial class hmNETDynamicLib
                 }
             }
 
+            public static int InputStates
+            {
+                get
+                {
+                    if (version < 919.11)
+                    {
+                        OutputDebugStream(ErrorMsg.MethodNeed919);
+                        throw new MissingMethodException("Hidemaru_Edit_InputStates");
+                    }
+                    if (pGetInputStates == null)
+                    {
+                        OutputDebugStream(ErrorMsg.MethodNeed919);
+                        throw new MissingMethodException("Hidemaru_Edit_InputStates");
+                    }
+
+                    return pGetInputStates();
+                }
+            }
+
             /// <summary>
             /// TotalText
             /// </summary>
