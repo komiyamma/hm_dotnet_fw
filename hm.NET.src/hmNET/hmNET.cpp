@@ -315,6 +315,10 @@ MACRO_DLL intHM_t DllDetachFunc_After_Hm866(intHM_t n) {
 		//  INETStaticLib::OutputDebugStream(L"keepdll解放指定登録とエラーが発生を理由としたマクロ終了に伴うdllが解放時\n");
 		// keepdll #dll, 0; のエラー発生時解放が指定してあり、エラーが発生した理由によりマクロが終了し、dllが解放されようとしている時
 	}
+	else if (n == 5) {
+		//  INETStaticLib::OutputDebugStream(L"keepdll #dll, 3を指定している時、ファイルを閉じて無題になるなど「プロセスが残った」状態でファイルが切り替わると呼び出される\n");
+		// keepdll #dll, 3; が指定してあること。
+	}
 	else {
 		// 未知の数
 	}

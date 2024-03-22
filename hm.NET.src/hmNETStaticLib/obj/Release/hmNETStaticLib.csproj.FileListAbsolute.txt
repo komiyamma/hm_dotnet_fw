@@ -18,4 +18,4 @@ G:\repogitory\hm_dotnet_fw\hm.NET.src\hmNETStaticLib\bin\Release\hmNETStaticLib.
 G:\repogitory\hm_dotnet_fw\hm.NET.src\hmNETStaticLib\bin\Release\hmNETStaticLib.netmodule
 G:\repogitory\hm_dotnet_fw\hm.NET.src\hmNETStaticLib\obj\Release\hmNETStaticLib.csproj.CoreCompileInputs.cache
 G:\repogitory\hm_dotnet_fw\hm.NET.src\hmNETStaticLib\obj\Release\hmNETStaticLib.netmodule
-G:\repogitory\hm_dotnet_fw\hm.NET.src\hmNETStaticLib\obj\Release\hmNETStaticLib.csprojAssemblyReference.cache
+G:\repogitory\hm_dotnet_fw\hm.NET.src\hmNETStaticLib\obj\Release\hmNETStaticLib.csproj.AssemblyReference.cache

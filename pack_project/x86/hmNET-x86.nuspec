@@ -3,7 +3,7 @@
   <metadata>
     <id>hmNET-x86</id>
     <title>hm.NET (32bit版)</title>
-    <version>2.0.7.9</version>
+    <version>2.0.8.1</version>
     <authors>Akitsugu Komiyama</authors>
     <owners>Akitsugu Komiyama</owners>
     <icon>icon.png</icon>
@@ -12,8 +12,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>「秀丸マクロ」と「C#」と「.NET」をシームレスに扱えるようにするライブラリ。loaddll経由。</summary>
     <description>hm.NET とは、秀丸マクロの「loaddll」関連機能を用い、.NET Framework 4.x を「C#経由で」で利用するためのライブラリです。</description>
-    <releaseNotes>Hm.Macro.Statement の返り値のうちResultプロパティとErrorプロパティの挙動を変更。秀丸マクロのresult値を追加で考慮するようにした。</releaseNotes>
-    <copyright>Copyright (C) 2017-2022 Akitsugu Komiyama</copyright>
+    <releaseNotes>範囲編集モードでhm.Macro.setTotalText(...)を実行した場合の不具合修正</releaseNotes>
+    <copyright>Copyright (C) 2017-2023 Akitsugu Komiyama</copyright>
     <tags>C# Hidemaru 秀丸 Library Macros</tags>
     <language>ja-JP</language>
     <dependencies>
