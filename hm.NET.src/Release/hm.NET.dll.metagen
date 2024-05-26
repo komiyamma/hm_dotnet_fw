@@ -32,6 +32,7 @@ Class Hidemaru.Hm+Macro: AutoLayout, AnsiClass, Class, NestedPublic, Abstract, S
   Properties:
     Boolean IsExecuting 'get ' : 
   Methods:
+    DebugInfo(Object[]): PrivateScope, Public, Static, HideBySig
     get_IsExecuting(): PrivateScope, Public, Static, HideBySig, SpecialName
     Statement(String, Object[]): PrivateScope, Public, Static, HideBySig
     Function(String, Object[]): PrivateScope, Public, Static, HideBySig

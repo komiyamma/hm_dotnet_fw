@@ -48,6 +48,9 @@ internal sealed partial class hmNETDynamicLib
         delegate int TEvalMacro([MarshalAs(UnmanagedType.LPWStr)] String pwsz);
 
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
+        delegate int TDebugInfo([MarshalAs(UnmanagedType.LPWStr)] String pwsz);
+
+        [UnmanagedFunctionPointer(CallingConvention.Winapi)]
         delegate int TCheckQueueStatus();
 
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
@@ -73,6 +76,7 @@ internal sealed partial class hmNETDynamicLib
         static TGetCursorPosUnicode pGetCursorPosUnicode;
         static TGetCursorPosUnicodeFromMousePos pGetCursorPosUnicodeFromMousePos;
         static TEvalMacro pEvalMacro;
+        static TDebugInfo pDebugInfo;
         static TCheckQueueStatus pCheckQueueStatus;
         static TAnalyzeEncoding pAnalyzeEncoding;
         static TLoadFileUnicode pLoadFileUnicode;
@@ -185,6 +189,12 @@ internal sealed partial class hmNETDynamicLib
                             pAnalyzeEncoding = hmExeHandle.GetProcDelegate<TAnalyzeEncoding>("Hidemaru_AnalyzeEncoding");
                             pLoadFileUnicode = hmExeHandle.GetProcDelegate<TLoadFileUnicode>("Hidemaru_LoadFileUnicode");
                         }
+
+                        if (version >= 898)
+                        {
+                            pDebugInfo = hmExeHandle.GetProcDelegate<TDebugInfo>("Hidemaru_DebugInfo");
+                        }
+
                         if (version >= 915)
                         {
                             pGetStaticVariable = hmExeHandle.GetProcDelegate<TGetStaticVariable>("Hidemaru_GetStaticVariable");

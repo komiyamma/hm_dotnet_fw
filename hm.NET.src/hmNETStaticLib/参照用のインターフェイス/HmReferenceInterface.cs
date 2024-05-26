@@ -32,6 +32,11 @@ namespace Hidemaru
         // マクロ空間
         public static class Macro
         {
+            public static int DebugInfo(params Object[] expressions)
+            {
+                return hmNETDynamicLib.Hidemaru.Macro.DebugInfo(expressions);
+            }
+
             // 実行中か
             public static bool IsExecuting
             {
