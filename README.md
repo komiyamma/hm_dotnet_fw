@@ -1,6 +1,6 @@
 # hm.NET
 
-![hm.NET v2.0.8](https://img.shields.io/badge/hm.NET-v2.0.8-6479ff.svg)
+![latest release](https://img.shields.io/github/v/release/komiyamma/hm_dotnet_fw?label=hm.NET&color=6479ff)
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 ![Hidemaru 8.73 x86](https://img.shields.io/badge/Hidemaru-v8.73-6479ff.svg)
 ![.NET Framework 4.5 － 4.8](https://img.shields.io/badge/.NET_Framework-v4.5_－_v4.8-6479ff.svg)
